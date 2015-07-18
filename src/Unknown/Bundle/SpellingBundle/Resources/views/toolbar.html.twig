@@ -1,0 +1,56 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% block toolbar %}
+    {% set typos = collector.typos %}
+    {% set icon %}
+        {% if typos|length == 0 %}
+            <span class="sf-toolbar-status sf-toolbar-status-green"></span>
+        {% else %}
+            <span class="sf-toolbar-status sf-toolbar-status-red">{{ typos|length }}</span>
+        {% endif %}
+        <div class="sf-toolbar-status sf-toolbar-info-piece-additional">Spelling</div>
+        <img src="" width="24" height="28" />
+    {% endset %}
+
+    {% set text %}
+        {% if typos|length > 0 %}
+            <b>List of typographical errors on page:</b><br/>
+            {% for typo in typos %}
+                <div class="sf-toolbar-info-piece">
+                    {{ loop.index }}. {{ typo }}
+                </div>
+            {% endfor %}
+        {% else %}
+            No typographical errors.
+        {% endif %}
+    {% endset %}
+
+    {# Set the "link" value to false if you do not have a big "panel"
+       section that you want to direct the user to. #}
+    {% include '@WebProfiler/Profiler/toolbar_item.html.twig' with { 'link': true } %}
+
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block menu %}
+    <span class="label">
+        <span class="icon">&nbsp;</span>
+        <strong>Spelling</strong>
+    </span>
+{% endblock %}
+
+{% block panel %}
+    {% if collector.typos|length == 0 %}
+        No typographical errors.
+    {% else %}
+        <h2>List of typographical errors on page:</h2>
+        {% for typo in collector.typos %}
+        <ul>
+            <li>{{ loop.index }}. {{ typo }}</li>
+        </ul>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

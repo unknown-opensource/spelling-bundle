@@ -1,0 +1,8 @@
+parameters:
+    unknown.spelling_collector.class: Unknown\Bundle\SpellingBundle\DataCollector\SpellingCollector
+
+services:
+    unknown.spelling_collector:
+        class: %unknown.spelling_collector.class%
+        tags:
+            - { name: data_collector, template: "UnknownSpellingBundle::toolbar.html.twig", id: "spelling_collector" }
