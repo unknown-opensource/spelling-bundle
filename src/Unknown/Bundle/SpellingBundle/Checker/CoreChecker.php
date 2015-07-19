@@ -86,7 +86,7 @@ class CoreChecker
         if ($this->wordList === null) {
             $words = $this->getStripedContents();
             // replace non letter characters with single space
-            $words = preg_replace('/[^\p{L}.]+/u', " ", $words);
+            $words = preg_replace('/[^\p{L}]+/u', " ", $words);
             $this->wordList = explode(" ", $words);
             $this->wordList = array_unique($this->wordList);
         }
