@@ -21,7 +21,7 @@ class WordChecker
      */
     public function valid($word)
     {
-        $wordLower = strtolower($word);
+        $wordLower = mb_strtolower($word, 'UTF-8');
         $this->parseCache();
         if (!isset($this->words[$wordLower])) {
             $this->words[$wordLower] = pspell_check($this->getPspell(), $word);
@@ -67,6 +67,13 @@ class WordChecker
      */
     protected function getCacheFile()
     {
-        return "../app/dictionary-".$this->language.".txt";
+        $pathA = "../app/dictionary-".$this->language.".txt";
+        if (file_exists($pathA)) {
+            return $pathA;
+        }
+        $pathB = "app/dictionary-".$this->language.".txt";
+        if (file_exists($pathB)) {
+            return $pathB;
+        }
     }
 }

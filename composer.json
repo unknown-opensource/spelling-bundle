@@ -1,7 +1,7 @@
 {
     "name":                                       "unknown/spelling-bundle",
     "type":                                       "library",
-    "version":                                    "1.0.1",
+    "version":                                    "1.0.2",
     "description":                                "Symfony2 Typographical error reporting bundle",
     "keywords": [
         "pspell", "aspell", "typos", "typo", "typographical", "spelling"
